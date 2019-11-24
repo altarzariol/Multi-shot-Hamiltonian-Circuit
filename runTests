@@ -1,0 +1,14 @@
+######
+##  Script to run all the encodings
+######
+for file in ./Input/*/* 
+do
+      # Edge Encoding
+      python main.py --baseline --stats "$file" ./BaselineEncoding/Aggregate_edge.lp
+      python main.py --quiet --scratch --stats "$file" ./IncrementalEncoding/Incremental_edge.lp
+      python main.py --quiet --stats "$file" ./IncrementalEncoding/Incremental_edge.lp
+      # Reach Encoding
+      python main.py --baseline --stats "$file" ./BaselineEncoding/Aggregate_reach.lp
+      python main.py --quiet --scratch --stats "$file" ./IncrementalEncoding/Incremental_reach_translation.lp
+      python main.py --quiet --stats "$file" ./IncrementalEncoding/Incremental_reach_translation.lp
+done
