@@ -4,7 +4,7 @@ We address the **Hamiltonian Circuit (HC)** problem, using Anser Set Programming
 ## Parsing input files
  -  OriginalInput/         - original input files (graphs that may have missing nodes)
  -  parse.lp               - logic program for parsing the input graphs
- -  converInput            - script to nomalize all the original input graphs using parse.lp
+ -  convertInput            - script to nomalize all the original input graphs using parse.lp
    
 ## Encodings 
  -  runTests               - run all the encodings (in total six versions) for each input file and create the csv file
