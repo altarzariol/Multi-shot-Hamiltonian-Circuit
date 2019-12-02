@@ -1,7 +1,7 @@
 ######
 ##  Script to run all the encodings
 ######
-for file in ./Processed_Input/*/* 
+for file in `ls -rS ./Processed_Input/*/*`
 do
       # Edge Encoding
       python main.py --quiet --baseline --stats "$file" ./BaselineEncoding/Aggregate_edge.lp
