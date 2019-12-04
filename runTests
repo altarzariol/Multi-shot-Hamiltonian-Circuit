@@ -1,14 +1,17 @@
 ######
 ##  Script to run all the encodings
 ######
+number=1
 for file in `ls -rS ./Processed_Input/*/*`
 do
+	  echo "instance number $number"
       # Edge Encoding
-      python main.py --quiet --baseline --stats "$file" ./BaselineEncoding/Aggregate_edge.lp
-      python main.py --quiet --scratch --stats "$file" ./IncrementalEncoding/Incremental_edge.lp
-      python main.py --quiet --stats "$file" ./IncrementalEncoding/Incremental_edge.lp
+      python main.py --quiet --baseline --stats --instanceNumber $number "$file" ./BaselineEncoding/Aggregate_edge.lp
+      python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Incremental_edge.lp
+      python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Incremental_edge.lp
       # Reach Encoding
-      python main.py --quiet --baseline --stats "$file" ./BaselineEncoding/Aggregate_reach.lp
-      python main.py --quiet --scratch --stats "$file" ./IncrementalEncoding/Incremental_reach_translation.lp
-      python main.py --quiet --stats "$file" ./IncrementalEncoding/Incremental_reach_translation.lp
+      python main.py --quiet --baseline --stats --instanceNumber $number "$file" ./BaselineEncoding/Aggregate_reach.lp
+      python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Incremental_reach_translation.lp
+      python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Incremental_reach_translation.lp
+      ((number=number+1))
 done
