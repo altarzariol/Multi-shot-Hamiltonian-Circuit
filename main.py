@@ -120,7 +120,7 @@ class App:
                     header=list(stats.keys())
                     # create the csv file if it doesn't exist, defining the headers
                     fileName=CSV_FILE_NAME+'/'+stats['mode']+'_'+ntpath.basename(self.args.file[1])+'.csv'
-                    if not os.path.isfile(CSV_FILE_NAME):
+                    if not os.path.isfile(fileName):
                         df.to_csv(fileName, header=header)
                     # otherwise, just append the new row
                     else:
