@@ -98,6 +98,7 @@ class App:
                         self.groundTotalTime = (self.control.statistics['summary']['times']['total'] - self.control.statistics['summary']['times']['solve'])
                     # define a dictionary containing the statistics of the last solving call
                     stats = { \
+                    'inputFile' :ntpath.basename(self.args.file[0]), \
                     'encodingFile' : ntpath.basename(self.args.file[1]), \
                     'last node':self.nodes, \
                     'max node':self.maxNode, \
@@ -115,7 +116,7 @@ class App:
                         stats[x] = self.control.statistics['summary']['times'][x]
                     stats['ground'] = self.control.statistics['summary']['times']['total'] - self.control.statistics['summary']['times']['solve']
                     # create a dataframe using stats
-                    df = DataFrame(data=stats, index={ntpath.basename(self.args.file[0])})
+                    df = DataFrame(data=stats, index={self.args.instanceNumber[0]})
                     header=list(stats.keys())
                     # create the csv file if it doesn't exist, defining the headers
                     if not os.path.isfile(CSV_FILE_NAME):
@@ -134,6 +135,7 @@ parser.add_argument("-x", "--scratch", action='store_true', help="start each ste
 parser.add_argument("-q", "--quiet", action='store_true', help="do not print models")
 parser.add_argument("-s", "--stats", action='store_true', help="print solver statistics")
 parser.add_argument("-v", "--verbose", action='store_true', help="print progress information")
+parser.add_argument("-i", "--instanceNumber", nargs=1, metavar=("NUM"), help="number of input instance")
 parser.add_argument("file", nargs="*", default=[], help="gringo source files")
 
 args = parser.parse_args()
