@@ -7,11 +7,11 @@ do
 	  echo "instance number $number"
       # Edge Encoding
       python main.py --quiet --baseline --stats --instanceNumber $number "$file" ./BaselineEncoding/Aggregate_edge.lp
-      python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Incremental_edge.lp
-      python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Incremental_edge.lp
+      python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Edge.lp
+      python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Edge.lp
       # Reach Encoding
       python main.py --quiet --baseline --stats --instanceNumber $number "$file" ./BaselineEncoding/Aggregate_reach.lp
-      python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Incremental_reach_translation.lp
-      python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Incremental_reach_translation.lp
+      python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Reach_translation.lp
+      python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Reach_translation.lp
       ((number=number+1))
 done
