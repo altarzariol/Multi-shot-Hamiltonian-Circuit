@@ -10,7 +10,7 @@ import ntpath
 from pandas import DataFrame
 from pathlib import Path
 
-CSV_FILE_NAME = str(Path().absolute())+'/DataOutput.csv'
+CSV_FILE_NAME = str(Path().absolute())
 
 class App:
     def __init__(self, args):
@@ -103,7 +103,7 @@ class App:
                     'last node':self.nodes, \
                     'max node':self.maxNode, \
                     'satisfiable':ret.satisfiable, \
-                    'mode':'standard' if (self.args.scratch or self.args.baseline) else 'incremental', \
+                    'mode':'Standard' if (self.args.scratch or self.args.baseline) else 'Incremental', \
                     'groundTotalTime' : self.groundTotalTime, \
                     'solvingTotalTime' : self.solvingTotalTime, \
                     'groundAndSolvingTotalTime' : self.groundTotalTime + self.solvingTotalTime
@@ -119,11 +119,12 @@ class App:
                     df = DataFrame(data=stats, index={self.args.instanceNumber[0]})
                     header=list(stats.keys())
                     # create the csv file if it doesn't exist, defining the headers
+                    fileName=CSV_FILE_NAME+'/'+stats['mode']+'_'+ntpath.basename(self.args.file[1])+'.csv'
                     if not os.path.isfile(CSV_FILE_NAME):
-                        df.to_csv(CSV_FILE_NAME, header=header)
+                        df.to_csv(fileName, header=header)
                     # otherwise, just append the new row
                     else:
-                        df.to_csv(CSV_FILE_NAME, mode='a', header=False)
+                        df.to_csv(fileName, mode='a', header=False)
             # update the number of nodes for the next call 
             self.nodes += 1
 
