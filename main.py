@@ -84,7 +84,11 @@ class App:
         # iterates until reaching the last node in the input graph
         while self.nodes <= self.maxNode:
             self.ground()
-            ret = self.control.solve(on_model=self.show)
+            #ret = self.control.solve(on_model=self.show)
+            with self.control.solve(on_model=self.show, async_=True) as handle:
+                wait = handle.wait(60)
+                handle.cancel()
+                ret = handle.get()
             # create a csv file with statistics (if the running script contains the option --stats)
             if self.args.stats:
                     # update the attribute solvingTotalTime and groundTotalTime, according to the mode considered
@@ -102,7 +106,7 @@ class App:
                     'encodingFile' : ntpath.basename(self.args.file[1]), \
                     'last node':self.nodes, \
                     'max node':self.maxNode, \
-                    'satisfiable':ret.satisfiable, \
+                    'satisfiable': 'Timeout' if (not wait) else ret.satisfiable, \
                     'mode':'Standard' if (self.args.scratch or self.args.baseline) else 'Incremental', \
                     'groundTotalTime' : self.groundTotalTime, \
                     'solvingTotalTime' : self.solvingTotalTime, \
