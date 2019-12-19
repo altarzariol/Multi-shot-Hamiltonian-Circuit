@@ -1,13 +1,21 @@
 ######
 ##  Script to normalize the ASP input files
 ######
-for file in ./OriginalInput/TSP/* 
+#####################################################
+for file in ./Original_Input/NewInput/* 
 do
-  echo "#const firstNode = 1."  > ./NormalizedInput/TSP/$(basename "$file")
-  clingo parse.lp "$file" --outf=1 | grep -A1 ANSWER | tail -n1 | tr ' ' '\n' | sort -t"(" -k1,1r -k2,2n | sed 's/z(\(.*\))\./#const maxNode = \1./' >> ./NormalizedInput/TSP/$(basename "$file")
+  echo "#const firstNode = 1."  > ./Processed_Input/NewInput/$(basename "$file")
+  clingo parse2.lp "$file" --outf=1 | grep -A1 ANSWER | tail -n1 | tr ' ' '\n' | sort -t"(" -k1,1r -k2,2n | sed 's/z(\(.*\))\./#const maxNode = \1./' >> ./Processed_Input/NewInput/$(basename "$file")
 done
-for file in ./OriginalInput/Experiments/* 
+#####################################################
+for file in ./Original_Input/TSP/* 
 do
-  echo "#const firstNode = 1."  > ./NormalizedInput/Experiments/$(basename "$file")
-  clingo parse.lp "$file" --outf=1 | grep -A1 ANSWER | tail -n1 | tr ' ' '\n' | sort -t"(" -k1,1r -k2,2n | sed 's/z(\(.*\))\./#const maxNode = \1./' >> ./NormalizedInput/Experiments/$(basename "$file")
+  echo "#const firstNode = 1."  > ./Processed_Input/TSP/$(basename "$file")
+  clingo parse.lp "$file" --outf=1 | grep -A1 ANSWER | tail -n1 | tr ' ' '\n' | sort -t"(" -k1,1r -k2,2n | sed 's/z(\(.*\))\./#const maxNode = \1./' >> ./Processed_Input/TSP/$(basename "$file")
+done
+#####################################################
+for file in ./Original_Input/Experiments/* 
+do
+  echo "#const firstNode = 1."  > ./Processed_Input/Experiments/$(basename "$file")
+  clingo parse.lp "$file" --outf=1 | grep -A1 ANSWER | tail -n1 | tr ' ' '\n' | sort -t"(" -k1,1r -k2,2n | sed 's/z(\(.*\))\./#const maxNode = \1./' >> ./Processed_Input/Experiments/$(basename "$file")
 done

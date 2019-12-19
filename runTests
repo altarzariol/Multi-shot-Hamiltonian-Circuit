@@ -1,8 +1,8 @@
 ######
-##  Script to run all the encodings
+##  Script to run all the encodings (just TSP)
 ######
 number=1
-for file in `ls -rS ./Processed_Input/*/*`
+for file in `ls -rS ./Processed_Input/TSP/*`
 do
 	  echo "instance number $number"
       # Edge Encoding
