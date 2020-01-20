@@ -2,16 +2,16 @@
 ##  Script to run all the encodings
 ######
 number=1
-for file in `ls -rS ./Processed_Input/TSP/*`
+for file in `ls -S ./Processed_Input/NewInput/*`
 do
 	  echo "instance number $number"
       # Edge Encoding
-      python main.py --quiet --baseline --stats --instanceNumber $number "$file" ./BaselineEncoding/Aggregate_edge.lp
-      python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Edge.lp
-      python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Edge.lp
+      /opt/conda/bin/python main.py --quiet --baseline --stats --instanceNumber $number "$file" ./BaselineEncoding/Aggregate_edge.lp
+      /opt/conda/bin/python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Edge.lp
+      /opt/conda/bin/python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Edge.lp
       # Reach Encoding
-      python main.py --quiet --baseline --stats --instanceNumber $number "$file" ./BaselineEncoding/Aggregate_reach.lp
-      python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Reach_translation.lp
-      python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Reach_translation.lp
+      /opt/conda/bin/python main.py --quiet --baseline --stats --instanceNumber $number "$file" ./BaselineEncoding/Aggregate_reach.lp
+      /opt/conda/bin/python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Reach_translation.lp
+      /opt/conda/bin/python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Reach_translation.lp
       ((number=number+1))
 done
