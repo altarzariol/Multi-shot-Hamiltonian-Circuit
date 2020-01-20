@@ -1,5 +1,5 @@
 ######
-##  Script to run all the encodings
+##  Script to run all the encodings (just TSP)
 ######
 number=1
 for file in `ls -S ./Processed_Input/NewInput/*`
