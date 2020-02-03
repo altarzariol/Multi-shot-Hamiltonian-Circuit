@@ -91,15 +91,9 @@ class App:
                 ret = handle.get()
             # create a csv file with statistics (if the running script contains the option --stats)
             if self.args.stats:
-                    # update the attribute solvingTotalTime and groundTotalTime, according to the mode considered
-                    if self.args.scratch or self.args.baseline:
-                        # standard
-                        self.solvingTotalTime += self.control.statistics['summary']['times']['solve']
-                        self.groundTotalTime += (self.control.statistics['summary']['times']['total'] - self.control.statistics['summary']['times']['solve'])
-                    else:
-                        # incremental 
-                        self.solvingTotalTime = self.control.statistics['summary']['times']['solve']
-                        self.groundTotalTime = (self.control.statistics['summary']['times']['total'] - self.control.statistics['summary']['times']['solve'])
+                    # update the attribute solvingTotalTime and groundTotalTime
+                    self.solvingTotalTime += self.control.statistics['summary']['times']['solve']
+                    self.groundTotalTime += (self.control.statistics['summary']['times']['total'] - self.control.statistics['summary']['times']['solve'])
                     # define a dictionary containing the statistics of the last solving call
                     stats = { \
                     'inputFile' :ntpath.basename(self.args.file[0]), \
@@ -123,7 +117,7 @@ class App:
                     df = DataFrame(data=stats, index={self.args.instanceNumber[0]})
                     header=list(stats.keys())
                     # create the csv file if it doesn't exist, defining the headers
-                    fileName=CSV_FILE_NAME+'/'+stats['mode']+'_'+ntpath.basename(self.args.file[1])+'.csv'
+                    fileName=CSV_FILE_NAME+'/'+'DataOutput.csv'
                     if not os.path.isfile(fileName):
                         df.to_csv(fileName, header=header)
                     # otherwise, just append the new row
