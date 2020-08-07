@@ -1,0 +1,19 @@
+######
+##  Script to run all the encodings (just TSP)
+######
+number=1
+for file in `ls -S ./Reorder_Input/Experiments/*`
+do
+	  echo "instance number $number"
+      # Edge Encoding
+      /opt/conda/bin/python main.py --quiet --baseline --stats --instanceNumber $number "$file" ./BaselineEncoding/Aggregate_edge.lp
+      /opt/conda/bin/python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Edge.lp
+      /opt/conda/bin/python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Edge.lp
+      /opt/conda/bin/python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Edge_edit.lp
+      /opt/conda/bin/python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Edge_edit.lp
+      # Reach Encoding
+      /opt/conda/bin/python main.py --quiet --baseline --stats --instanceNumber $number "$file" ./BaselineEncoding/Aggregate_reach.lp
+      /opt/conda/bin/python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Reach_translation.lp
+      /opt/conda/bin/python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Reach_translation.lp
+      ((number=number+1))
+done

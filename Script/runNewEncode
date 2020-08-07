@@ -1,0 +1,13 @@
+######
+##  Script to run edited encodings
+######
+number=1
+for file in `ls -S ./Reorder_Input/NewInput/*`
+do
+	  echo "Standard mode - instance number $number"
+      # Edge Encoding
+      /opt/conda/bin/python main.py --quiet --scratch --stats --instanceNumber $number "$file" ./IncrementalEncoding/Edge_edit.lp
+      echo "Inc mode - instance number $number"
+      /opt/conda/bin/python main.py --quiet --stats --instanceNumber $number "$file" ./IncrementalEncoding/Edge_edit.lp
+      ((number=number+1))
+done
